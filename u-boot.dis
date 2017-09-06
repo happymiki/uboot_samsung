@@ -46,7 +46,7 @@ c3e00050 <_end_vect>:
 c3e00050:	c3e00000 	.word	0xc3e00000
 
 c3e00054 <_TEXT_PHY_BASE>:
-c3e00054:	23e00000 	.word	0x23e00000
+c3e00054:	33e00000 	.word	0x33e00000
 
 c3e00058 <_armboot_start>:
 c3e00058:	c3e00010 	.word	0xc3e00010
@@ -531,7 +531,7 @@ c3e00698:	ff000fff 	.word	0xff000fff
 c3e0069c:	d0037488 	.word	0xd0037488
 c3e006a0:	eb200000 	.word	0xeb200000
 c3e006a4:	0000ffff 	.word	0x0000ffff
-c3e006a8:	23e00000 	.word	0x23e00000
+c3e006a8:	33e00000 	.word	0x33e00000
 c3e006ac:	fff00000 	.word	0xfff00000
 c3e006b0:	c3fff000 	.word	0xc3fff000
 c3e006b4:	d0020000 	.word	0xd0020000
@@ -789,7 +789,7 @@ c3e00a70:	00101002 	.word	0x00101002
 c3e00a74:	00101003 	.word	0x00101003
 c3e00a78:	0fff2010 	.word	0x0fff2010
 c3e00a7c:	00212400 	.word	0x00212400
-c3e00a80:	20e01323 	.word	0x20e01323
+c3e00a80:	30f01323 	.word	0x30f01323
 c3e00a84:	40f01323 	.word	0x40f01323
 c3e00a88:	00000618 	.word	0x00000618
 c3e00a8c:	28233287 	.word	0x28233287
@@ -1218,8 +1218,8 @@ c3e01084:	e59f300c 	ldr	r3, [pc, #12]	; c3e01098 <onenand_bl2_copy+0x58>
 c3e01088:	e1560003 	cmp	r6, r3
 c3e0108c:	1affffef 	bne	c3e01050 <onenand_bl2_copy+0x10>
 c3e01090:	e8bd8070 	pop	{r4, r5, r6, pc}
-c3e01094:	23e00000 	.word	0x23e00000
-c3e01098:	23e80000 	.word	0x23e80000
+c3e01094:	33e00000 	.word	0x33e00000
+c3e01098:	33e80000 	.word	0x33e80000
 
 c3e0109c <nand_readpage>:
 c3e0109c:	e59fc094 	ldr	ip, [pc, #148]	; c3e01138 <nand_readpage+0x9c>
@@ -1319,7 +1319,7 @@ c3e01208:	e8bd80f8 	pop	{r3, r4, r5, r6, r7, pc}
 c3e0120c:	e2855040 	add	r5, r5, #64	; 0x40
 c3e01210:	eaffffe4 	b	c3e011a8 <copy_uboot_to_ram+0x6c>
 c3e01214:	b0e00000 	.word	0xb0e00000
-c3e01218:	23e00000 	.word	0x23e00000
+c3e01218:	33e00000 	.word	0x33e00000
 
 c3e0121c <movi_bl2_copy>:
 c3e0121c:	e59f2050 	ldr	r2, [pc, #80]	; c3e01274 <movi_bl2_copy+0x58>
@@ -1346,7 +1346,7 @@ c3e0126c:	eafffffe 	b	c3e0126c <movi_bl2_copy+0x50>
 c3e01270:	e8bd8008 	pop	{r3, pc}
 c3e01274:	d0037000 	.word	0xd0037000
 c3e01278:	eb200000 	.word	0xeb200000
-c3e0127c:	23e00000 	.word	0x23e00000
+c3e0127c:	33e00000 	.word	0x33e00000
 
 c3e01280 <movi_zImage_copy>:
 c3e01280:	e59f3030 	ldr	r3, [pc, #48]	; c3e012b8 <movi_zImage_copy+0x38>
@@ -1365,7 +1365,7 @@ c3e012b0:	eafffffe 	b	c3e012b0 <movi_zImage_copy+0x30>
 c3e012b4:	e8bd8008 	pop	{r3, pc}
 c3e012b8:	d003e000 	.word	0xd003e000
 c3e012bc:	003c6fce 	.word	0x003c6fce
-c3e012c0:	20008000 	.word	0x20008000
+c3e012c0:	30008000 	.word	0x30008000
 
 c3e012c4 <print_movi_bl2_info>:
 c3e012c4:	e3a01031 	mov	r1, #49	; 0x31
@@ -14828,7 +14828,7 @@ c3e0db2c:	c3e31e0b 	.word	0xc3e31e0b
 c3e0db30 <do_autoscript>:
 c3e0db30:	e3520001 	cmp	r2, #1
 c3e0db34:	e92d4010 	push	{r4, lr}
-c3e0db38:	d3a04202 	movle	r4, #536870912	; 0x20000000
+c3e0db38:	d3a04203 	movle	r4, #805306368	; 0x30000000
 c3e0db3c:	da000004 	ble	c3e0db54 <do_autoscript+0x24>
 c3e0db40:	e5930004 	ldr	r0, [r3, #4]
 c3e0db44:	e3a01000 	mov	r1, #0
@@ -16765,7 +16765,7 @@ c3e0f79c:	c3e0f808 	.word	0xc3e0f808
 c3e0f7a0:	e59f0264 	ldr	r0, [pc, #612]	; c3e0fa0c <do_ext2load+0x298>
 c3e0f7a4:	eb0011a9 	bl	c3e13e50 <getenv>
 c3e0f7a8:	e3500000 	cmp	r0, #0
-c3e0f7ac:	03a09202 	moveq	r9, #536870912	; 0x20000000
+c3e0f7ac:	03a09203 	moveq	r9, #805306368	; 0x30000000
 c3e0f7b0:	13a01000 	movne	r1, #0
 c3e0f7b4:	13a02010 	movne	r2, #16
 c3e0f7b8:	1a000003 	bne	c3e0f7cc <do_ext2load+0x58>
@@ -18611,7 +18611,7 @@ c3e1136c:	e1a04002 	mov	r4, r2
 c3e11370:	e1a06003 	mov	r6, r3
 c3e11374:	eb000ab5 	bl	c3e13e50 <getenv>
 c3e11378:	e3500000 	cmp	r0, #0
-c3e1137c:	03a05202 	moveq	r5, #536870912	; 0x20000000
+c3e1137c:	03a05203 	moveq	r5, #805306368	; 0x30000000
 c3e11380:	0a000003 	beq	c3e11394 <do_load_serial_bin+0x34>
 c3e11384:	e3a01000 	mov	r1, #0
 c3e11388:	e3a02010 	mov	r2, #16
@@ -19221,7 +19221,7 @@ c3e11ccc:	b2644000 	rsblt	r4, r4, #0
 c3e11cd0:	a1e04004 	mvnge	r4, r4
 c3e11cd4:	e2677000 	rsb	r7, r7, #0
 c3e11cd8:	eaffffd7 	b	c3e11c3c <do_mem_mtest+0x64>
-c3e11cdc:	e3a0a202 	mov	sl, #536870912	; 0x20000000
+c3e11cdc:	e3a0a203 	mov	sl, #805306368	; 0x30000000
 c3e11ce0:	e59f9014 	ldr	r9, [pc, #20]	; c3e11cfc <do_mem_mtest+0x124>
 c3e11ce4:	e3a04000 	mov	r4, #0
 c3e11ce8:	eaffffd2 	b	c3e11c38 <do_mem_mtest+0x60>
@@ -19229,7 +19229,7 @@ c3e11cec:	c3e34418 	.word	0xc3e34418
 c3e11cf0:	c3e343f0 	.word	0xc3e343f0
 c3e11cf4:	c3e34419 	.word	0xc3e34419
 c3e11cf8:	c3e34424 	.word	0xc3e34424
-c3e11cfc:	23e00000 	.word	0x23e00000
+c3e11cfc:	33e00000 	.word	0x33e00000
 
 c3e11d00 <cmd_get_data_size>:
 c3e11d00:	e92d4030 	push	{r4, r5, lr}
@@ -20840,7 +20840,7 @@ c3e13590:	e58d7004 	str	r7, [sp, #4]
 c3e13594:	ebfffd03 	bl	c3e129a8 <nand_block_write>
 c3e13598:	e2504000 	subs	r4, r0, #0
 c3e1359c:	1a000009 	bne	c3e135c8 <do_nand+0x834>
-c3e135a0:	e3a03202 	mov	r3, #536870912	; 0x20000000
+c3e135a0:	e3a03203 	mov	r3, #805306368	; 0x30000000
 c3e135a4:	e5931000 	ldr	r1, [r3]
 c3e135a8:	e59f2360 	ldr	r2, [pc, #864]	; c3e13910 <do_nand+0xb7c>
 c3e135ac:	e1510002 	cmp	r1, r2
@@ -31782,7 +31782,7 @@ c3e1da1c <env_relocate_spec_onenand>:
 c3e1da1c:	eaffffdb 	b	c3e1d990 <use_default>
 
 c3e1da20 <env_relocate_spec_movinand>:
-c3e1da20:	e3a03202 	mov	r3, #536870912	; 0x20000000
+c3e1da20:	e3a03203 	mov	r3, #805306368	; 0x30000000
 c3e1da24:	e92d4010 	push	{r4, lr}
 c3e1da28:	e59f2058 	ldr	r2, [pc, #88]	; c3e1da88 <env_relocate_spec_movinand+0x68>
 c3e1da2c:	e5931000 	ldr	r1, [r3]
@@ -32335,11 +32335,11 @@ c3e1e22c:	e12fff1e 	bx	lr
 c3e1e230:	e0200000 	.word	0xe0200000
 c3e1e234:	01051460 	.word	0x01051460
 c3e1e238:	00000998 	.word	0x00000998
-c3e1e23c:	20000100 	.word	0x20000100
+c3e1e23c:	30000100 	.word	0x30000100
 
 c3e1e240 <dram_init>:
 c3e1e240:	e5983000 	ldr	r3, [r8]
-c3e1e244:	e3a02202 	mov	r2, #536870912	; 0x20000000
+c3e1e244:	e3a02203 	mov	r2, #805306368	; 0x30000000
 c3e1e248:	e583201c 	str	r2, [r3, #28]
 c3e1e24c:	e5982000 	ldr	r2, [r8]
 c3e1e250:	e3a03201 	mov	r3, #268435456	; 0x10000000
@@ -32383,7 +32383,7 @@ c3e1e2c4:	e3a01102 	mov	r1, #-2147483648	; 0x80000000
 c3e1e2c8:	e3a02702 	mov	r2, #524288	; 0x80000
 c3e1e2cc:	e59f0000 	ldr	r0, [pc, #0]	; c3e1e2d4 <read_hword+0x10>
 c3e1e2d0:	ea000550 	b	c3e1f818 <memcpy>
-c3e1e2d4:	23e00000 	.word	0x23e00000
+c3e1e2d4:	33e00000 	.word	0x33e00000
 
 c3e1e2d8 <flash_print_info>:
 c3e1e2d8:	e92d40f0 	push	{r4, r5, r6, r7, lr}
