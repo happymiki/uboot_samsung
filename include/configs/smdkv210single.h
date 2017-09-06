@@ -69,7 +69,8 @@
 /* skip to load BL2 */
 //#define FAST_BOOT		1
 
-#define MEMORY_BASE_ADDRESS	0x20000000
+// #define MEMORY_BASE_ADDRESS	0x20000000
+#define MEMORY_BASE_ADDRESS	0x30000000
 
 /* input clock of PLL */
 #define CONFIG_SYS_CLK_FREQ	24000000	/* the SMDK6400 has 24MHz input clock */
@@ -469,6 +470,7 @@
 #define CONFIG_NR_DRAM_BANKS    2          /* we have 2 bank of DRAM */
 // #define SDRAM_BANK_SIZE         0x20000000    /* 512 MB */
 #define SDRAM_BANK_SIZE         0x10000000    /* 256 MB */
+
 #define PHYS_SDRAM_1            MEMORY_BASE_ADDRESS /* SDRAM Bank #1 */
 #define PHYS_SDRAM_1_SIZE       SDRAM_BANK_SIZE
 // #define PHYS_SDRAM_2            (MEMORY_BASE_ADDRESS + SDRAM_BANK_SIZE) /* SDRAM Bank #2 */
