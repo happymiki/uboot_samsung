@@ -593,8 +593,12 @@ mmu_table:
 	FL_SECTION_ENTRY __base,3,0,0,0
 	.set __base,__base+1
 	.endr
+	
+// 下面是c0000000-d0000000这一段虚拟地址的映射表设置，现在的设置是将这一段内存
+// 映射到20000000-30000000这一段物理地址。
 
-	.set __base,0x200
+//	.set __base,0x200
+	.set __base,0x300
 	// 256MB for SDRAM with cacheable
 	.rept 0xD00 - 0xC00
 	FL_SECTION_ENTRY __base,3,0,1,1
