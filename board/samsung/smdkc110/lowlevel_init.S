@@ -115,7 +115,7 @@ lowlevel_init:
 	beq     1f			/* r0 == r1 then skip sdram init   */
 
 	/* init PMIC chip */
-	# bl PMIC_InitIp		// 因为我们的开发板没有PMIC,因此函数内部发送IIC接口命令是会卡死
+	// bl PMIC_InitIp		// 因为我们的开发板没有PMIC,因此函数内部发送IIC接口命令是会卡死
 							// 所以要屏蔽掉这里
 
 	/* init system clock */
