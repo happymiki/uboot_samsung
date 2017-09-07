@@ -67,18 +67,25 @@ static void dm9000_pre_init(void)
 	unsigned int tmp;
 
 #if defined(DM9000_16BIT_DATA)
-	SROM_BW_REG &= ~(0xf << 20);
-	SROM_BW_REG |= (0<<23) | (0<<22) | (0<<21) | (1<<20);
+//	SROM_BW_REG &= ~(0xf << 20);
+//	SROM_BW_REG |= (0<<23) | (0<<22) | (0<<21) | (1<<20);
+	SROM_BW_REG &= ~(0xf << 4);
+	SROM_BW_REG |= (1<<7) | (1<<6) | (1<<5) | (1<<4);
+
 
 #else	
 	SROM_BW_REG &= ~(0xf << 20);
 	SROM_BW_REG |= (0<<19) | (0<<18) | (0<<16);
 #endif
-	SROM_BC5_REG = ((0<<28)|(1<<24)|(5<<16)|(1<<12)|(4<<8)|(6<<4)|(0<<0));
+//	SROM_BC5_REG = ((0<<28)|(1<<24)|(5<<16)|(1<<12)|(4<<8)|(6<<4)|(0<<0));
+	SROM_BC1_REG = ((0<<28)|(1<<24)|(5<<16)|(1<<12)|(4<<8)|(6<<4)|(0<<0));
 
 	tmp = MP01CON_REG;
-	tmp &=~(0xf<<20);
-	tmp |=(2<<20);
+//	tmp &=~(0xf<<20);
+//	tmp |=(2<<20);
+	tmp &=~(0xf<<4);
+	tmp |=(2<<4);
+
 	MP01CON_REG = tmp;
 }
 

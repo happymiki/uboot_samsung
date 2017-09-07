@@ -131,14 +131,17 @@
 #define CONFIG_DRIVER_DM9000	1
 
 #ifdef CONFIG_DRIVER_DM9000
-#define CONFIG_DM9000_BASE		(0xA8000000)
+// #define CONFIG_DM9000_BASE		(0xA8000000)
+#define CONFIG_DM9000_BASE		(0x88000300)
+
 #define DM9000_IO			(CONFIG_DM9000_BASE)
 #if defined(DM9000_16BIT_DATA)
-#define DM9000_DATA			(CONFIG_DM9000_BASE+2)
+// #define DM9000_DATA			(CONFIG_DM9000_BASE+2)
+#define DM9000_DATA			(CONFIG_DM9000_BASE+4)
 #else
 #define DM9000_DATA			(CONFIG_DM9000_BASE+1)
 #endif
-#endif
+#endif 
 
 /*
  * select serial console configuration
