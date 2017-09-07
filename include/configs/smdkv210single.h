@@ -247,7 +247,7 @@
  */
 #define CFG_LONGHELP				/* undef to save memory		*/
 
-#define CFG_PROMPT              "SMDKV210 # "   /* Monitor Command Prompt       */
+#define CFG_PROMPT              "MIKI210 # "   /* Monitor Command Prompt       */
 
 #define CFG_CBSIZE		256		/* Console I/O Buffer Size	*/
 #define CFG_PBSIZE		384		/* Print Buffer Size */
