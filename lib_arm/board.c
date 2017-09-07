@@ -65,16 +65,12 @@
 #include "../drivers/net/lan91c96.h"
 #endif
 
-#include <s5pc110.h>
-
 DECLARE_GLOBAL_DATA_PTR;
 
 void nand_init (void);
 void onenand_init(void);
 
 ulong monitor_flash_len;
-
-int check_flash_flag=1;
 
 #ifdef CONFIG_HAS_DATAFLASH
 extern int  AT91F_DataflashInit(void);
@@ -186,121 +182,6 @@ static int init_baudrate (void)
 	return (0);
 }
 
-static void open_backlight(void)
-{
-	unsigned int reg;
-
-	//open backlight. GPF3_5=1
-	reg = readl(GPF3CON);
-	reg = reg & ~(0xf<<20) | (0x1<<20);
-	writel(reg,GPF3CON);
-
-	reg = readl(GPF3PUD);
-	reg = reg & ~(0x3<<10) | (0x2<<10);
-	writel(reg,GPF3PUD);
-
-	reg = readl(GPF3DAT);
-	reg |= (0x1<<5);
-	writel(reg,GPF3DAT);
-}
-
-/*
- * GPH0_2: LEFT
- */
-static int check_menu_update_from_sd(void)
-{
-	unsigned int i;
-	unsigned int reg;
-
-	//GPH0_2
-	reg = readl(GPH0CON);
-	reg = reg & ~(0xf<<8) | (0x0<<8);
-	writel(reg,GPH0CON);
-
-	for(i=0;i<100;i++)
-		udelay(500);
-
-	reg = readl(GPH0DAT);
-	reg = reg & (0x1<<2);
-
-	if(reg)
-		return 1;
-	else //update mode
-		return 0;
-}
-
-/*
- * GPC1_1: GPRS_PWR_EN
- * GPJ0_4: CDMAPWR
- * GPJ0_1: GSM_RST
- * GPJ0_6: GSM_ON_OFF
- */
-static void open_gprs(void)
-{
-	unsigned int i;
-	unsigned int reg;
-
-	//step0: init gpio
-	reg = readl(GPC1CON);
-	reg = reg & ~(0xf<<4) | (0x1<<4);	//set GPC1_1 to output and enable pullup
-	writel(reg,GPC1CON);
-	reg = readl(GPC1PUD);
-	reg = reg & ~(0x3<<2) | (0x2<<2);
-	writel(reg,GPC1PUD);
-
-	reg = readl(GPJ0CON);
-	reg	= reg & ~(0xf<<4) | (0x1<<4);	//set GPJ0_1 to output and enable pullup
-	writel(reg,GPJ0CON);
-	reg = readl(GPJ0PUD);
-	reg = reg & ~(0x3<<2) | (0x2<<2);
-	writel(reg,GPJ0PUD);
-
-	reg = readl(GPJ0CON);
-	reg	= reg & ~(0xf<<16) | (0x1<<16);	//set GPJ0_4 to output and enable pullup
-	writel(reg,GPJ0CON);
-	reg = readl(GPJ0PUD);
-	reg = reg & ~(0x3<<8) | (0x2<<8);
-	writel(reg,GPJ0PUD);
-
-	reg = readl(GPJ0CON);
-	reg	= reg & ~(0xf<<24) | (0x1<<24);	//set GPJ0_6 to low level and enable pullup
-	writel(reg,GPJ0CON);
-	reg = readl(GPJ0PUD);
-	reg = reg & ~(0x3<<12) | (0x2<<12);
-	writel(reg,GPJ0PUD);
-
-	reg = readl(GPJ0DAT);
-	reg &= ~(0x1<<6);
-	writel(reg,GPJ0DAT);
-
-	//step1: disable reset
-	reg = readl(GPJ0DAT);
-	reg &= ~(0x1<<1);
-	writel(reg,GPJ0DAT);
-
-	//step2: enable GPRS power(4.2V to GPRS module)
-	reg = readl(GPC1DAT);
-	reg |= (0x1<<1);
-	writel(reg,GPC1DAT);
-
-	//step3: enable CDMAPWR(4.2V to GC864)
-	reg = readl(GPJ0DAT);
-	reg |= (0x1<<4);
-	writel(reg,GPJ0DAT);
-
-	for(i=0;i<100;i++)
-		udelay(1000);
-
-	//step4: power on GC864
-	reg = readl(GPJ0DAT);
-	reg |= (0x1<<6);
-	writel(reg,GPJ0DAT);
-	for(i=0;i<1000/*2000*/;i++)
-		udelay(1000);
-	reg &= ~(0x1<<6);
-	writel(reg,GPJ0DAT);
-}
-
 static int display_banner (void)
 {
 	printf ("\n\n%s\n\n", version_string);
@@ -318,8 +199,6 @@ static int display_banner (void)
 	debug ("IRQ Stack: %08lx\n", IRQ_STACK_START);
 	debug ("FIQ Stack: %08lx\n", FIQ_STACK_START);
 #endif
-	open_backlight();//lqm.
-	//open_gprs();
 
 	return (0);
 }
@@ -593,10 +472,10 @@ void start_armboot (void)
 		puts("NAND:    ");
 		nand_init();
 	#endif
-
+	
 #endif /* CONFIG_SMDKC100 */
 
-#if defined(CONFIG_X210)
+#if defined(CONFIG_SMDKC110)
 
 	#if defined(CONFIG_GENERIC_MMC)
 		puts ("SD/MMC:  ");
@@ -604,16 +483,7 @@ void start_armboot (void)
 		if (mmc_exist != 0)
 		{
 			puts ("0 MB\n");
-#ifdef CONFIG_CHECK_X210CV3
-			check_flash_flag=0;//check inand error!
-#endif
 		}
-#ifdef CONFIG_CHECK_X210CV3
-		else
-		{
-			check_flash_flag=1;//check inand ok! 
-		}
-#endif
 	#endif
 
 	#if defined(CONFIG_MTD_ONENAND)
@@ -628,8 +498,8 @@ void start_armboot (void)
 		puts("NAND:    ");
 		nand_init();
 	#endif
-
-#endif /* CONFIG_X210 */
+	
+#endif /* CONFIG_SMDKC110 */
 
 #if defined(CONFIG_SMDK6440)
 	#if defined(CONFIG_GENERIC_MMC)
@@ -731,7 +601,7 @@ void start_armboot (void)
 	movi_set_capacity();
 	movi_init();
 	movi_set_ofs(MOVI_TOTAL_BLKCNT);
-
+	
 	#endif
 	#endif
 
@@ -880,24 +750,6 @@ extern void dm644x_eth_set_mac_addr (const u_int8_t *addr);
 	puts("IDE:   ");
 	ide_init();
 #endif
-
-/****************lxg added**************/
-#ifdef CONFIG_MPAD
-	extern int x210_preboot_init(void);
-	x210_preboot_init();
-#endif
-/****************end**********************/
-
-	/* check menukey to update from sd */
-	extern void update_all(void);
-	if(check_menu_update_from_sd()==0)//update mode
-	{
-		puts ("[LEFT DOWN] update mode\n");
-		run_command("fdisk -c 0",0);
-		update_all();
-	}
-	else
-		puts ("[LEFT UP] boot mode\n");
 
 	/* main_loop() can return to retry autoboot, if so just run it again. */
 	for (;;) {
